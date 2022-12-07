@@ -82,3 +82,27 @@ foreach ($sack in $sacks) {
 
 # Display output
 Write-Host "The sum for the overlap items (part 1) is $sum"
+
+# part 2
+# I'm not writing comments on this because no
+$sackNumbers = [System.Collections.ArrayList]@()
+$sackNumbers = foreach ($sackno in 1..$sacks.Count) {$sacknumbers.Add($sackno)}
+$position = $sackNumbers[0]
+$sum2 = 0
+do {
+    $sackOne = $sacks[$position]
+    $sackTwo = $sacks[$position+1]
+    $sackThree = $sacks[$position+2]
+    foreach ($item in $sackOne.tochararray()) {
+        if ($sackTwo.IndexOf($item) -ne -1) {
+            if ($sackThree.IndexOf($item) -ne -1) {
+                    $found = $item
+                }
+        }
+    }
+    $value2 = Get-Priority $found
+    $sum2 += $value2
+    $position = $position+3
+} until ($position -eq $sacks.Count)
+
+Write-Host "The sum for the overlap items (part 2) is $sum2"
